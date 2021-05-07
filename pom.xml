@@ -2,13 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
-	<artifactId>bank</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+	<groupId>a82481a7-69d4-4da4-b41c-2a3ac261fd49</groupId>
+	<artifactId>authenticapi</artifactId>
+    <version>1.0.0</version>
     <packaging>mule-application</packaging>
 
-	<name>bank</name>
+	<name>authenticapi</name>
 
+    <description>cloudApplication</description>
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -30,6 +31,19 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
+				<cloudHubDeployment>
+					<objectStoreV2>true</objectStoreV2>
+					<uri>https://anypoint.mulesoft.com</uri>
+					<muleVersion>${mule.version}</muleVersion>
+					<!-- Deploy User Parameter -->
+					<username>Ritwik-Cyber</username>
+					<password>Ritwgupta$:)22184</password>
+					<!-- Environment Parameter -->
+					<environment>Sandbox</environment>
+					<applicationName>Unique546</applicationName>
+					//<businessGroup>${cloudhub.bg}</businessGroup>
+					<workerType>MICRO</workerType>
+				</cloudHubDeployment>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -48,13 +62,7 @@
             <version>1.2.0</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-		<dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-apikit-module</artifactId>
-            <version>1.4.1</version>
-            <classifier>mule-plugin</classifier>
-        </dependency>
-    </dependencies>
+	</dependencies>
 
 	<repositories>
           <repository>

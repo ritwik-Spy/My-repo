@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="5672c7f9-1160-4055-b9a7-e91bdbde6dfd" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="authenticapiFlow" doc:id="13f712db-3f9a-4cb1-b4dd-2fda343be834" >
+		<http:listener doc:name="Listener" doc:id="daa440c5-6f78-4aa9-9554-885ba0be1047" config-ref="HTTP_Listener_config" path="/NewApp"/>
+		<logger level="INFO" doc:name="StratValidation" doc:id="842aad8f-5f8d-46e6-943c-c67f449d39ac" message="Enter Username Password"/>
+		<ee:transform doc:name="Transform Message" doc:id="31aa4c73-af4a-40fe-9687-32b0024534f2">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"Password":"Mark45"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<choice doc:name="Choice" doc:id="acd120f7-9486-4534-bcd5-bf984f6474b6" >
+			<when expression='#[payload."Password" == "Mark"]'>
+				<flow-ref doc:name="Flow Reference" doc:id="47209c9c-5809-49b6-b9f8-ed3efa982162" name="flowsub"/>
+			</when>
+			<otherwise >
+				<logger level="INFO" doc:name="Logger" doc:id="94bec95d-1ee2-4cee-a573-cbf02ee9d376" message="User not found"/>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow doc:id="4344b07e-846e-425a-be9f-773564db7557" name="flowsub">
+		<logger level="INFO" doc:name="Logger" doc:id="efa61057-7942-4553-bfe7-abde6a15e7b1" message="user Logged in succesfully"/>
+	</flow>
+</mule>
