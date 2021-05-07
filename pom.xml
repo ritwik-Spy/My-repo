@@ -41,7 +41,7 @@
 					<!-- Environment Parameter -->
 					<environment>Sandbox</environment>
 					<applicationName>Unique546</applicationName>
-					//<businessGroup>${cloudhub.bg}</businessGroup>
+					<!--<businessGroup>${cloudhub.bg}</businessGroup>-->
 					<workerType>MICRO</workerType>
 				</cloudHubDeployment>
 				</configuration>
